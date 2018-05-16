@@ -1,11 +1,12 @@
-FROM alpine
+FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apk add octave --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
-RUN apk add less
+RUN apt-get update && apt-get install -y octave less
+RUN apt-get autoclean && apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN addgroup octave && adduser -D -s /bin/bash octave -G octave
+RUN useradd -ms /bin/bash octave
 COPY HMM /home/octave/
 ADD run.sh /home/octave/
 RUN chown -R octave:octave /home/octave/
