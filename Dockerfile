@@ -10,9 +10,9 @@ COPY HMM /home/octave/
 ADD run.sh /home/octave/
 RUN chown -R octave:octave /home/octave/
 RUN mkdir -p /root/shared/results/
-RUN chown -R octave:octave /root/
+RUN chown -R octave:octave /root
 
-USER octave
+USER root
 WORKDIR /home/octave
 
-#ENTRYPOINT ["/home/octave/run.sh"]
+ENTRYPOINT ["/home/octave/run.sh"]
